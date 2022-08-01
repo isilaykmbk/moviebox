@@ -13,12 +13,12 @@
                 <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
                     <div class="flex items-center">
                     <div class="ml-2">
-                        <div class="text-sm font-semibold text-gray-600">{{movie.title}}</div>
+                        <div class="text-sm font-semibold text-gray-600"><a href="{% url 'details' movie.id  %}">{{movie.titleText.text}}</a></div>
                     </div>
                     </div>
                   </div>
                 {% endfor %}
-                <p class="text-right text-gray-500 italic mr-5">View All</p>
+                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_upcoming' %}">View All</a></p>
             </div>
         </div>
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -28,7 +28,16 @@
             <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
                 <h1 class="text-center font-bold text-gray-700">TOP RATING FILMS</h1>
                     <!--Add top rated movies list here-->
-                <p class="text-right text-gray-500 italic mr-5">View All</p>
+                {% for ratedmovie in rating_list %}
+                <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-semibold text-gray-600"><a href="{% url 'details' ratedmovie.imdb_id  %}">{{ratedmovie.title}}</a></div>
+                    </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_rating' %}">View All</a></p>
             </div>
         </div>
     
@@ -39,7 +48,16 @@
             <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
                 <h1 class="text-center font-bold text-gray-700">POPULAR FILMS</h1>
                     <!--Add popular movies list here-->
-                <p class="text-right text-gray-500 italic mr-5">View All</p>
+                 {% for movie in popularity_list %}
+                <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-semibold text-gray-600"><a href="{% url 'details' movie.imdb_id  %}">{{movie.title}}</a></div>
+                    </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_popular' %}">View All</a></p>
             </div>
         </div>
     </div>

@@ -139,4 +139,6 @@ INTERNAL_IPS = [
 ]
 
 RAPIDAPI_KEY = "f06b3851b9msh97b2234bffc4877p1cf7d6jsn99a2331052e8"
-RAPIDAPI_HOST = "moviesminidatabase.rapidapi.com"
+RAPIDAPI_HOST = "moviesminidatabase.p.rapidapi.com"
+RAPIDAPI_HOST2 = "moviesdatabase.p.rapidapi.com"
+

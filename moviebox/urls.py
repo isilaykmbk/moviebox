@@ -7,4 +7,5 @@ from moviebox.core import views
 
 urlpatterns = [
     path('', include('moviebox.core.urls')),
+    # path('movie-details/', ),
 ]
