@@ -37,7 +37,7 @@
                     </div>
                   </div>
                 {% endfor %}
-                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_rating' %}">View All</a></p>
+                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_rating' '?page=1' %}">View All</a></p>
             </div>
         </div>
     
@@ -57,7 +57,7 @@
                     </div>
                   </div>
                 {% endfor %}
-                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_popular' %}">View All</a></p>
+                <p class="text-right text-gray-500 italic mr-5"><a href="{% url 'view_all_popular' '?page=1' %}">View All</a></p>
             </div>
         </div>
     </div>

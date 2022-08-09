@@ -70,16 +70,23 @@ class ViewAllUpcoming(TemplateView):
 class ViewAllRating(View):
     template_name = 'view_all_rating.html'
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         rapid_client = RapidClientMovieMiniData()
-        rating_list = rapid_client.get_orderby_rating()
+        import ipdb; ipdb.set_trace()
+        page = kwargs['page']
+        rating_list = rapid_client.get_orderby_rating(page)
+
+        rating_list_view_all = rating_list["results"]
+
+        next_page = urlparse(rating_list["links"]["next"]).query
+        previous_page = urlparse(rating_list["links"]["previous"]).query
 
         context = {
-            'next_link': rating_list["links"]["next"],
-            'previous_link': rating_list["links"]["previous"]
-        }
+            'rating_list_view_all': rating_list_view_all,
+            'next_page': f'?{next_page}',
+            'previous_page': f'?{previous_page}',
 
-        obj = urlparse(context['next_link'])
+        }
 
         return render(request, self.template_name, context)
 
@@ -87,11 +94,22 @@ class ViewAllRating(View):
 class ViewAllPopular(View):
     template_name = 'view_all_popular.html'
 
-    def get(self, request):
+    def get(self, request, *args, **kwargs):
         rapid_client = RapidClientMovieMiniData()
-        response_view_popular = rapid_client.get_orderby_popularity()
+        import ipdb; ipdb.set_trace()
+        page = kwargs['page']
+        popularity_list = rapid_client.get_orderby_popularity(page)
+
+        popularity_list_view_all = popularity_list["results"]
+
+        next_page = urlparse(popularity_list["links"]["next"]).query
+        previous_page = urlparse(popularity_list["links"]["previous"]).query
+
         context = {
-            "view_all_popular": response_view_popular["results"][:15]
+            'popularity_list_view_all': popularity_list_view_all,
+            'next_page': f'?{next_page}',
+            'previous_page': f'?{previous_page}'
+
         }
         return render(request, self.template_name, context)
 

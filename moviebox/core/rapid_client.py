@@ -43,12 +43,18 @@ class RapidClientMovieMiniData:
 
         return json.loads(response.text)
 
-    def get_orderby_popularity(self):
-        endpoint_url = f"{self.API_URL}/movie/order/byPopularity/"
+    def get_orderby_popularity(self, page='?page=1'):
+        if page == '?page=1':
+            endpoint_url = f"{self.API_URL}/movie/order/byPopularity/{page}&page_size=10"
+        else:
+            endpoint_url = f"{self.API_URL}/movie/order/byPopularity/{page}&page_size=10"
         return self.get(endpoint_url)
 
-    def get_orderby_rating(self):
-        endpoint_url = f"{self.API_URL}/movie/order/byRating/"
+    def get_orderby_rating(self, page='?page=1'):
+        if page == '?page=1':
+            endpoint_url = f"{self.API_URL}/movie/order/byRating/{page}&page_size=10"
+        else:
+            endpoint_url = f"{self.API_URL}/movie/order/byRating/{page}&page_size=10"
         return self.get(endpoint_url)
 
     def get_movie_details(self, movie_id):

@@ -3,30 +3,28 @@
 {% block content %}
 <div class="grid grid-rows-2">
     <div class="py-20 flex">
-
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-cyan-400 to-blue-light-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-0 sm:rounded-3xl"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-cyan-400 to-blue-light-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-6 sm:rounded-3xl"></div>
             <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
                 <h1 class="text-center font-bold text-gray-700">POPULAR FILMS</h1>
-                {% for movie in view_all_popular %}
+                    <!--Add POPULAR movies list here-->
+                {% for movie in popularity_list_view_all %}
                 <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
                     <div class="flex items-center">
                     <div class="ml-2">
-                        <div class="text-sm font-semibold text-gray-600"><a href="">{{movie.title}}</a></div>
+                        <div class="text-sm font-semibold text-gray-600"><a href="{% url 'details' movie.imdb_id  %}">{{movie.title}}</a></div>
                     </div>
                     </div>
                   </div>
                 {% endfor %}
-                <p class="text-right text-gray-500 italic mr-5"><a href="">View All</a></p>
+                <div class="text-right font-semibold text-gray-600"><a href="{% url 'view_all_popular' next_page  %}">Next Page</a></div>
+                <div class="text-left font-semibold text-gray-600"><a href="{% url 'view_all_popular' previous_page  %}">Previous</a></div>
+
             </div>
         </div>
     </div>
-    <div>
-       
-    </div>
-
 </div>
 
 {% endblock %}

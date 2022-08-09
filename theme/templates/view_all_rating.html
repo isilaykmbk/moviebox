@@ -3,50 +3,28 @@
 {% block content %}
 <div class="grid grid-rows-2">
     <div class="py-20 flex">
-
-        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div class="relative py-3 sm:max-w-xl sm:mx-auto">
             <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-light-blue-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-cyan-400 to-blue-light-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-0 sm:rounded-3xl"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-cyan-400 to-blue-light-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:rotate-6 sm:rounded-3xl"></div>
             <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
                 <h1 class="text-center font-bold text-gray-700">TOP RATING FILMS</h1>
-                {% for movie in rating_movies %}
+                    <!--Add top rated movies list here-->
+                {% for movie in rating_list_view_all %}
                 <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
                     <div class="flex items-center">
                     <div class="ml-2">
-                        <div class="text-sm font-semibold text-gray-600"><a href="">{{movie.title}}</a></div>
+                        <div class="text-sm font-semibold text-gray-600"><a href="{% url 'details' movie.imdb_id  %}">{{movie.title}}</a></div>
                     </div>
                     </div>
-                </div>
+                  </div>
                 {% endfor %}
-          <div class="grid grid-rows-2">
-             <div class="py-20 flex">
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if rating_movies.has_previous %}
-                            <a href="?page={{ rating_movies.previous_page_number }}">previous</a>
-                        {% endif %}
+                <div class="text-right font-semibold text-gray-600"><a href="{% url 'view_all_rating' next_page  %}">Next Page</a></div>
+                <div class="text-left font-semibold text-gray-600"><a href="{% url 'view_all_rating' previous_page  %}">Previous</a></div>
 
-                        <span class="current">
-                            Page {{ rating_movies.number }} of {{ rating_movies.paginator.num_pages }}.
-                        </span>
-
-                        {% if rating_movies.has_next %}
-                            <a href="?page={{  }}">next</a>
-                        {% endif %}
-                    </span>
-                </div>
-             </div>
-          </div>
-                <br> {{next_link}} <br/>
-
-           </div>
+            </div>
         </div>
     </div>
-    <div>
-
-    </div>
-
 </div>
 
 {% endblock %}
