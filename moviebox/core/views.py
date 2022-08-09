@@ -47,9 +47,25 @@ class MovieDetails(View):
         rapid_client = RapidClientMovieMiniData()
 
         response_detail = rapid_client.get_movie_details(kwargs['id'])
-        import ipdb; ipdb.set_trace()
         context = {
             "detail_list": response_detail["results"]
+        }
+        return render(request, self.template_name, context)
+
+
+class SearchView(View):
+    template_name = 'search_result.html'
+
+    def get(self, request, **kwargs):
+        #print(dir(request))
+        rapid_client = RapidClientMovieMiniData()
+        search_input = self.request.GET.get("search")
+        query = rapid_client.get_movie_title(search_input)
+        search_view = query["results"]
+
+        context = {
+            'search_view': search_view
+
         }
         return render(request, self.template_name, context)
 
@@ -72,7 +88,6 @@ class ViewAllRating(View):
 
     def get(self, request, *args, **kwargs):
         rapid_client = RapidClientMovieMiniData()
-        import ipdb; ipdb.set_trace()
         page = kwargs['page']
         rating_list = rapid_client.get_orderby_rating(page)
 
@@ -96,13 +111,13 @@ class ViewAllPopular(View):
 
     def get(self, request, *args, **kwargs):
         rapid_client = RapidClientMovieMiniData()
-        import ipdb; ipdb.set_trace()
         page = kwargs['page']
         popularity_list = rapid_client.get_orderby_popularity(page)
 
         popularity_list_view_all = popularity_list["results"]
 
         next_page = urlparse(popularity_list["links"]["next"]).query
+
         previous_page = urlparse(popularity_list["links"]["previous"]).query
 
         context = {

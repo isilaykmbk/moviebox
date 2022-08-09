@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
+                <h1 class="text-center font-bold text-gray-700">FILM</h1>
+                    <!--Add POPULAR movies list here-->
+                {% for movie in search_view %}
+                <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <div class="text-sm font-semibold text-gray-600"><a href="">{{movie.title}}</a></div>
+                    </div>
+                    </div>
+                  </div>
+                {% endfor %}
+
+
+        </div>
+{% endblock %}
