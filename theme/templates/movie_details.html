@@ -3,24 +3,103 @@
 {% block content %}
 <div class="grid grid-rows-2">
     <div class="py-20 flex">
-        <h1> NAME: {{detail_list.title}} </h1>
-        <h1> YEAR: {{detail_list.year}} </h1>
-        <h1> DESCRIPTION: {{detail_list.description}} </h1>
 
         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="column max-w-3l py-1 sm:px-6 lg:px-8">
 
-            <div class="px-4 py-6 sm:px-0">
-
+            <div class="relative px-16 py-5 bg-white shadow-lg sm:rounded-3xl">
+                <div class="flex justify-center items-center py-3  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <img src="{{detail_list.banner}}" >
+                    </div>
+                    </div>
                 </div>
+
             </div>
         </div>
-    </div>
 
+         <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+
+            <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
+                <h1 class="text-center font-bold text-gray-700">NAME</h1>
+
+                <div class="flex justify-center items-center p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <h1 class="text-sm font-semibold text-gray-600">{{detail_list.title}}</h1>
+                    </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+
+            <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
+                <h1 class="text-center font-bold text-gray-700">RATING</h1>
+
+                <div class="flex justify-center items-center p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <h1 class="text-sm font-semibold text-gray-600">{{detail_list.rating}}</h1>
+                    </div>
+                    </div>
+                  </div>
+
+            </div>
+        </div>
+
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+
+            <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
+                <h1 class="text-center font-bold text-gray-700">GENRE</h1>
+
+                <div class="flex justify-center items-center p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        {% for genre in detail_list.gen %}
+                        <h1 class="text-sm font-semibold text-gray-600">{{genre.genre}}</h1>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+            <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
+                <h1 class="text-center font-bold text-gray-700">YEAR</h1>
+
+                <div class="flex justify-center items-center p-4 my-6  rounded-lg border border-gray-100 shadow-md">
+                    <div class="flex items-center">
+                    <div class="ml-2">
+                        <h1 class="text-sm font-semibold text-gray-600">{{detail_list.year}}</h1>
+                    </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+
+        <div class="relative py-3 sm:max-w-xl sm:mx-auto">
+
+            <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
+                <h1 class="text-center font-bold text-gray-700">DESCRIPTION</h1>
+
+                <div class="flex justify-center items-center p-4 my-6 rounded-lg border border-gray-100 shadow-md">
+                    <div class="relative sm:mx-auto">
+                    <div class="ml-2 sm:mx-auto">
+                        <h1 class="relative font-semibold text-gray-600">{{detail_list.description}}</h1>
+                    </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+
+    </div>
 </div>
+
 
 {% endblock %}

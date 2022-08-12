@@ -3,9 +3,9 @@
 {% block content %}
 
 <div class="relative px-16 py-10 bg-white shadow-lg sm:rounded-3xl">
-                <h1 class="text-center font-bold text-gray-700">FILM</h1>
+                <h1 class="text-center font-bold text-gray-700">{{category}} Films</h1>
                     <!--Add POPULAR movies list here-->
-                {% for movie in page %}
+                {% for movie in genre_list %}
                 <div class="flex justify-center items-center h-16 p-4 my-6  rounded-lg border border-gray-100 shadow-md">
                     <div class="flex items-center">
                     <div class="ml-2">
@@ -15,12 +15,12 @@
                   </div>
                 {% endfor %}
 
-                {% if page.has_previous %}
-                <div  class='text-left font-semibold text-gray-600'><a href="?search={{search}}&page={{page.previous_page_number}}">Previous Page</a></div>
-                {% endif %}
-                {% if page.has_next %}
-                <div class='text-right font-semibold text-gray-600' ><a href="?search={{search}}&page={{page.next_page_number}}">Next Page </a> </div>
-                {% endif %}
+
+                <div class="text-left font-semibold text-gray-600"><a href="/genre/{{category}}/{{previous_page}}">Previous</a></div>
+
+                <div class="text-right font-semibold text-gray-600"><a href="/genre/{{category}}/{{next_page}}">Next Page</a></div>
+
+
         </div>
 
 {% endblock %}

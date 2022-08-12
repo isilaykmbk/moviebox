@@ -1,3 +1,6 @@
+import json
+
+import ipdb
 import requests
 from django.views.generic.base import TemplateView, View
 from django.http import HttpResponseRedirect
@@ -5,7 +8,6 @@ from django.urls import reverse
 from django.shortcuts import render
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from moviebox.core.rapid_client import RapidClientMovieMiniData
-from moviebox.core.rapid_client import RapidClientMovieData
 from urllib.parse import urlparse
 
 
@@ -18,13 +20,6 @@ class DashboardView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        # upcoming movies
-        rapid_client_upmovie = RapidClientMovieData()
-
-        response = rapid_client_upmovie.get_upcoming_movie()
-        upcoming_list = response["results"][:5]
-        context["upcoming_list"] = upcoming_list
 
         # top rating and popular movies
         rapid_client = RapidClientMovieMiniData()
@@ -57,30 +52,51 @@ class SearchView(View):
     template_name = 'search_result.html'
 
     def get(self, request, **kwargs):
-        #print(dir(request))
+
         rapid_client = RapidClientMovieMiniData()
         search_input = self.request.GET.get("search")
         query = rapid_client.get_movie_title(search_input)
+
         search_view = query["results"]
 
+        paginator = Paginator(search_view, 20)
+
+        page_num = request.GET.get('page', 1)
+
+        page = paginator.page(page_num)
+
         context = {
-            'search_view': search_view
+            'page': page,
+            'search': search_input,
 
         }
         return render(request, self.template_name, context)
 
 
-class ViewAllUpcoming(TemplateView):
-    template_name = 'view_all_upcoming.html'
+class GenreView(View):
+    template_name = 'genre.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        rapid_client = RapidClientMovieData()
-        response_view_upcoming = rapid_client.get_upcoming_movie()
-        view_all_upcoming = response_view_upcoming["results"][:15]
-        context["view_all_upcoming"] = view_all_upcoming
+    def get(self, request, *args, **kwargs):
+        rapid_client = RapidClientMovieMiniData()
+        page_num = self.request.GET.get('page')
 
-        return context
+        genre_response = rapid_client.get_movie_genre(kwargs['category'], f'?page={page_num}')
+
+        genre_list = genre_response['results']
+
+        next_page = urlparse(genre_response["links"]["next"]).query
+        previous_page = urlparse(genre_response["links"]["previous"]).query
+
+        if previous_page == '':
+            previous_page = 'page=1'
+
+        context = {
+            "genre_list": genre_list,
+            'next_page': f'?{next_page}',
+            'previous_page': f'?{previous_page}',
+            'category': kwargs['category']
+        }
+        return render(request, self.template_name, context)
 
 
 class ViewAllRating(View):
@@ -94,6 +110,7 @@ class ViewAllRating(View):
         rating_list_view_all = rating_list["results"]
 
         next_page = urlparse(rating_list["links"]["next"]).query
+
         previous_page = urlparse(rating_list["links"]["previous"]).query
 
         context = {

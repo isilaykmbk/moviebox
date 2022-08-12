@@ -20,18 +20,19 @@
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
                     <div class="flex-shrink-0">
-                        <img class="h-8 w-18" src="{% static 'images/moviebox.png' %}" alt="Workflow">
+                        <a href="{% url 'home' %}"
+                               class="bg-gray-900 text-white px-3 py-2 h-8 w-18 rounded-md text-sm font-medium"> Dashboard</a>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="#"
-                               class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Comedy</a>
+                            <a href="/genre/Comedy/?page=1"
+                               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"> Comedy</a>
 
-                            <a href="#"
+                            <a href="/genre/Drama/?page=1"
                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dram</a>
 
-                            <a href="#"
-                               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Love</a>
+                            <a href="/genre/Romance/?page=1"
+                               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Romance</a>
                         </div>
                     </div>
                 </div>
